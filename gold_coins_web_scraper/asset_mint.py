@@ -31,7 +31,7 @@ class GoldMarketNo1:
                     price = re.findall("\d+\.\d+", raw_price)
                     price = float(price[0])
                     print(coin, price)
-                    # do some tuff with data 
+                    # do some stuff with data 
                     # sql logging / yield
                     yield {coin: price}
 
