@@ -2,7 +2,7 @@ version: '3'
 services: 
   redis-server:
     image: 'redis' 
-  node-app:
+  scrapers:
     restart: always
     build: .
     ports:

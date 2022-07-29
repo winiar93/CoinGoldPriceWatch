@@ -1,16 +1,16 @@
 # Specify a base image
 
-FROM node:alpine
+FROM python:3.9
 
-WORKDIR '/app'
-# mv files to docker
-COPY package.json .
+ADD requirements.txt .
+RUN pip install -r requirements.txt
 
-# req
-RUN npm install
+RUN mkdir /app
+WORKDIR /app
 
-COPY . .
+COPY /app /app
 
-# Default command
-CMD ["npm", "start"]
+
+EXPOSE 5000
+CMD ["python", "asset_mint.py"]
 
