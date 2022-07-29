@@ -2,7 +2,10 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import logging
+from redis import Redis
+import time
 
+redis = Redis(host='redis', port=6379)
 
 # consider bigger dict of url for each gold coin or scrape whole webside ?
 urls_dict = {"Canadian Maple Leaf": "https://mennicakapitalowa.pl/product-pol-153-moneta-zlota-Kanadyjski-Lisc-Klonu-1oz-2022-najtaniej.html",
@@ -30,10 +33,13 @@ class GoldMarketNo1:
                     raw_price = raw_price.replace(" ","").replace(",",".")
                     price = re.findall("\d+\.\d+", raw_price)
                     price = float(price[0])
+
+                    redis.set(coin, price)
                     print(coin, price)
+
                     # do some stuff with data 
                     # sql logging / yield
-                    yield {coin: price}
+                    #yield {coin: price}
 
                 except Exception as e:
                     logging.critical(e, exc_info=True)
@@ -41,8 +47,8 @@ class GoldMarketNo1:
                 logging.critical(f"Error while downloading coin price {r.status_code} - {url}", exc_info=True)
 
 gmn1 = GoldMarketNo1(urls_dict)
-data = gmn1.get_coin_prices()
 
+while True:
+    data = gmn1.get_coin_prices()
+    time.sleep(30)
 # consider list comprehension to store data ?
-
-print([x for x in data])

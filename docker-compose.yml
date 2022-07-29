@@ -1,9 +1,18 @@
 version: '3'
-services: 
-  redis-server:
-    image: 'redis' 
-  scrapers:
-    restart: always
-    build: .
+services:
+  redis:
+    image: redis
+  web:
+    build:
+     context: .
+     dockerfile: ./web/Dockerfile-web
     ports:
-      - "4001:8081"
+     - "5000:5000"
+    volumes:
+     - .:/code
+    depends_on:
+     - redis
+  scrapers:
+    build: 
+     context: .
+     dockerfile: ./scrapers/Dockerfile

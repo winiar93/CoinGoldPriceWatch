@@ -1,6 +1,4 @@
 Flask
 pytest
-beautifulsoup4
-psycopg2
 requests
 redis
