@@ -4,7 +4,7 @@ services:
     image: redis
   web:
     build:
-     context: .
+     context: ./web
      dockerfile: ./web/Dockerfile-web
     ports:
      - "5000:5000"
@@ -14,5 +14,5 @@ services:
      - redis
   scrapers:
     build: 
-     context: .
+     context: ./scrapers
      dockerfile: ./scrapers/Dockerfile
