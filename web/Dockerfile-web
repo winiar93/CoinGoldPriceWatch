@@ -10,5 +10,5 @@ COPY . .
 
 
 EXPOSE 5000
-CMD ["python3", "web/flask_app.py"]
+CMD ["python3", "flask_app.py"]
 

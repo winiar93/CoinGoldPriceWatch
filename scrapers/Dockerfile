@@ -11,4 +11,4 @@ COPY . .
 
 
 #EXPOSE 5000
-CMD ["python3", "scrapers/asset_mint.py"]
+CMD ["python3", "asset_mint.py"]

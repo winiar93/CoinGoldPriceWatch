@@ -3,9 +3,10 @@ services:
   redis:
     image: redis
   web:
+    container_name: gold_coin_web
     build:
      context: ./web
-     dockerfile: ./web/Dockerfile-web
+     dockerfile: Dockerfile-web
     ports:
      - "5000:5000"
     volumes:
@@ -13,6 +14,7 @@ services:
     depends_on:
      - redis
   scrapers:
+    container_name: gold_coin_scrapers
     build: 
      context: ./scrapers
-     dockerfile: ./scrapers/Dockerfile
+     dockerfile: Dockerfile
