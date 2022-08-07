@@ -2,7 +2,11 @@ from flask import Flask
 from redis import Redis
 
 app = Flask(__name__)
-redis = Redis(host='redis', port=6379)
+try:
+    redis = Redis(host='redis://redis-master.default.svc.cluster.local', port=6379)
+    print("connected to redis")
+except Exception as e:
+    print(f"{e}")
 
 @app.route('/')
 def hello():
