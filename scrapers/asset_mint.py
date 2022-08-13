@@ -2,10 +2,11 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import logging
-from redis import Redis
 import time
+from rejson import Client, Path
 
-redis = Redis(host='redis', port=6379)
+rejson_client = Client(host='localhost', port=6379, decode_responses=True)
+
 
 # consider bigger dict of url for each gold coin or scrape whole webside ?
 urls_dict = {"Canadian Maple Leaf": "https://mennicakapitalowa.pl/product-pol-153-moneta-zlota-Kanadyjski-Lisc-Klonu-1oz-2022-najtaniej.html",
@@ -20,9 +21,10 @@ class GoldMarketNo1:
     """https://mennicakapitalowa.pl"""
     def __init__(self, urls_dict) -> None:
         self.urls_dict = urls_dict
+        self.output_data = {'Mint':'mennicakapitalowa.pl'}
 
     def get_coin_prices(self):
-        for coin in self.urls_dict:
+        for cnt, coin in enumerate(self.urls_dict):
             url = self.urls_dict[coin]
             r = requests.get(url)
             if r.status_code == 200:
@@ -33,13 +35,11 @@ class GoldMarketNo1:
                     raw_price = raw_price.replace(" ","").replace(",",".")
                     price = re.findall("\d+\.\d+", raw_price)
                     price = float(price[0])
-
-                    redis.set(coin, price)
+                    tmp_data = {'Coin': f'{coin}', 'Price': f'{price}'}
+                    self.output_data.update(tmp_data)
+                    rejson_client.jsonset(f'mennicakapitalowa:{cnt}', Path.rootPath(), self.output_data)
                     print(coin, price)
 
-                    # do some stuff with data 
-                    # sql logging / yield
-                    #yield {coin: price}
 
                 except Exception as e:
                     logging.critical(e, exc_info=True)
