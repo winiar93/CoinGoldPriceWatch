@@ -2,3 +2,5 @@ Flask
 pytest
 requests
 redis
+rejson
+pandas

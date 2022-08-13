@@ -2,3 +2,4 @@ pytest
 beautifulsoup4
 requests
 redis
+rejson

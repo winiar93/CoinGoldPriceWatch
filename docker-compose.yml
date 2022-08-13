@@ -1,7 +1,8 @@
 version: '3'
 services:
   redis:
-    image: redis
+    hostname: rejson
+    image: redislabs/rejson:latest
   web:
     container_name: gold_coin_web
     build:
