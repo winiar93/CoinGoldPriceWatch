@@ -1,4 +1,4 @@
-default styling. Nothing to do with freexing first row and column
+/* default styling. Nothing to do with freexing first row and column */
 main {display: flex;}
 main > * {border: 1px solid;}
 table {border-collapse: collapse; font-family: helvetica}
@@ -62,3 +62,6 @@ tr > :first-child {
 tr > :first-child {
   box-shadow: inset 0px 1px black;
 }
+
+
+
