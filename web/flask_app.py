@@ -4,7 +4,9 @@ import redis
 import pandas as pd
 
 try:
-    client = Client(host='rejson', port=6379, decode_responses=True)
+    # for local testing 
+    #client = Client(host='rejson', port=6379, decode_responses=True)
+    client = Client(host='redis-master.default.svc.cluster.local', port=6379, decode_responses=True)
     print("connected to redis")
 except Exception as e:
     print(f"{e}")
