@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kubernetes-web-app-web-service
+  name: asset-mint-service
 spec:
   selector:
-    app: kubernetes-web-app-web
+    app: asset-mint
   ports:
   - protocol: "TCP"
     port: 6000
@@ -15,20 +15,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubernetes-web-app-web
+  name: asset-mint
 spec:
   selector:
     matchLabels:
-      app: kubernetes-web-app-web
-  replicas: 2
+      app: asset-mint
+  replicas: 4
   template:
     metadata:
       labels:
-        app: kubernetes-web-app-web
+        app: asset-mint
     spec:
       containers:
-      - name: kubernetes-web-app-web
-        image: kubernetes-web-app-web:latest
+      - name: asset-mint
+        image: kubernetes-web-app_web:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000

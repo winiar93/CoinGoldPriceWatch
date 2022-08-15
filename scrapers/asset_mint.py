@@ -5,7 +5,9 @@ import logging
 import time
 from rejson import Client, Path
 
-rejson_client = Client(host='rejson', port=6379, decode_responses=True)
+# for local testing
+#rejson_client = Client(host='rejson', port=6379, decode_responses=True)
+rejson_client = Client(host='redis-master.default.svc.cluster.local', port=6379, decode_responses=True)
 
 logging.basicConfig(level=logging.ERROR)
 

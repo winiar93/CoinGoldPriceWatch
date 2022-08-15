@@ -1,0 +1,6 @@
+kubectl apply -f deployment_redis.yaml
+kubectl apply -f deployment-scraper.yaml
+kubectl apply -f asset-mint-service.yaml
+kubectl expose deployments scraper --type=NodePort
+kubectl expose deployment asset-mint --type=NodePort
+kubectl expose deployment redis-master --port 6379 --type=NodePort

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper
+spec:
+  selector:
+    matchLabels:
+      app: scraper
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: scraper
+    spec:
+      containers:
+      - name: scraper
+        image: kubernetes-web-app_scrapers:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 6379
