@@ -5,11 +5,18 @@ import logging
 import time
 from rejson import Client, Path
 
-# for local testing
-#rejson_client = Client(host='rejson', port=6379, decode_responses=True)
-rejson_client = Client(host='redis-master.default.svc.cluster.local', port=6379, decode_responses=True)
 
 logging.basicConfig(level=logging.ERROR)
+
+# for local testing
+#rejson_client = Client(host='rejson', port=6379, decode_responses=True)
+try:
+    rejson_client = Client(host='redis-master.default.svc.cluster.local', port=6379, decode_responses=True)
+except Exception as e:
+    logging.error(f"{e}")
+else:
+    rejson_client = Client(host='rejson', port=6379, decode_responses=True)
+
 
 
 class GoldMarketNo1:

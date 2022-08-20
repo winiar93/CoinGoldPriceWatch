@@ -4,6 +4,7 @@ services:
     hostname: rejson
     image: redislabs/rejson:latest
   web:
+    image: asset-mint
     container_name: gold_coin_web
     build:
      context: ./web
@@ -15,6 +16,7 @@ services:
     depends_on:
      - redis
   scrapers:
+    image: asset-mint-scrapers
     container_name: gold_coin_scrapers
     build: 
      context: ./scrapers

@@ -9,6 +9,5 @@ WORKDIR /scrapers
 
 COPY . .
 
-
 #EXPOSE 5000
 CMD ["python3", "asset_mint.py"]

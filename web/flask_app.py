@@ -2,14 +2,18 @@ from flask import Flask, render_template
 from rejson import Client, Path
 import redis
 import pandas as pd
+import logging
+
+
+logging.basicConfig(level=logging.ERROR)
+
 
 try:
-    # for local testing 
-    #client = Client(host='rejson', port=6379, decode_responses=True)
     client = Client(host='redis-master.default.svc.cluster.local', port=6379, decode_responses=True)
-    print("connected to redis")
 except Exception as e:
-    print(f"{e}")
+    logging.error(f"{e}")
+else:
+    client = Client(host='rejson', port=6379, decode_responses=True)
 
 app = Flask(__name__)
 
