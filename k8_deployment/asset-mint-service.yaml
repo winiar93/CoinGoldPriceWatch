@@ -9,7 +9,7 @@ spec:
   - protocol: "TCP"
     port: 6000
     targetPort: 5000
-  type: LoadBalancer
+  type: NodePort
 
 ---
 apiVersion: apps/v1
@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: asset-mint
-        image: kubernetes-web-app_web:latest
+        image: asset-mint:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
